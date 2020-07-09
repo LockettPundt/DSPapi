@@ -1,9 +1,8 @@
 const moment = require('moment');
 
-const emailGenerator = (order) => {
-  const {
-    firstName, lastName, time, jobDate, services, _id: id,
-  } = order;
+const emailGenerator = ({
+  firstName, lastName, time, jobDate, services, _id: id,
+}) => {
   const formattedDate = `${moment(jobDate).format('LL')} at ${time}`;
   const template = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
