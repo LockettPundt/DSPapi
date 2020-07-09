@@ -1,16 +1,9 @@
 const nodemailer = require('nodemailer');
+const emailGenerator = require('./emailGenerator');
 require('dotenv').config();
-const moment = require('moment');
 
 async function nodeMailer(order) {
-  console.log(order.jobDate);
-  const time = `${moment(order.jobDate).format('LL')} at ${order.time}`;
-  const template = `
-    <div>
-      <h3>Confirmation Number: ${order._id}</h3>
-      <h4>When: ${time}</h4>
-    </div>
-  `;
+  const template = emailGenerator(order);
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
