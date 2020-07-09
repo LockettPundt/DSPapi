@@ -7,13 +7,13 @@ const router = express.Router();
 // GET single order.
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  console.log(id);
+  // console.log(id);
   const response = await OrderModel.findOne({ _id: id });
   res.json(response);
 });
 
 router.post('/addjob', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {
     firstName,
     lastName,
