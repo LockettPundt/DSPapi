@@ -21,6 +21,10 @@ const OrderModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  time: {
+    type: String,
+    required: true,
+  },
   services: {
     type: [String],
     required: true,
