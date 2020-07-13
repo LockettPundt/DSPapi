@@ -29,7 +29,7 @@ const OrderModel = new mongoose.Schema({
     type: [String],
     required: true,
   },
-  terms: {
+  acceptTerms: {
     type: Boolean,
     required: true,
   },
