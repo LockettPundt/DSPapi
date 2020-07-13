@@ -41,7 +41,7 @@ const resolvers = {
 
     removeOrder: async (obj, { id }) => {
       try {
-        const removeOrder = await OrderModel.remove({ _id: id });
+        const removeOrder = await OrderModel.deleteOne({ _id: id });
         return { message: `${id} was removed.` };
       } catch (error) {
         console.log(error);
