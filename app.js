@@ -14,8 +14,7 @@ mongoose.connect(process.env.DB_URI, {
   .then(() => console.log(`connected to ${process.env.DB_NAME}`))
   .catch((err) => console.log(err));
 
-const indexRouter = require('./routes/index');
-const apiRouter = require('./routes/api');
+// const indexRouter = require('./routes/index');
 
 const app = express();
 
@@ -26,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/api', apiRouter);
+// app.use('/', indexRouter);
+// app.use('/api', apiRouter);
 
 module.exports = app;
