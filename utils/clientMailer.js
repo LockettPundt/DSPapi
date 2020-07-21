@@ -17,10 +17,10 @@ async function nodeMailer(order) {
 
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: '"DSP 👻" <dspdonotreply@gmail.com>', // sender address
-    to: 'kalifornium@hotmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
+    from: '"Daniel Stabler Photography" <dspdonotreply@gmail.com>', // sender address
+    to: `${order.email}`, // list of receivers
+    subject: `Thank You ${order.firstName}`, // Subject line
+    text: `Thank You ${order.firstName}`, // plain text body
     html: template, // html body
   });
 
