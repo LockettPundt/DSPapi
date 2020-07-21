@@ -33,6 +33,10 @@ const OrderModel = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  phone: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('orders', OrderModel);
