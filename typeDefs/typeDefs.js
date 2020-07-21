@@ -12,6 +12,7 @@ const typeDefs = gql`
     services: [String]!
     acceptTerms: Boolean
     time: String!
+    phone: String!
   }
   
   input OrderInput {
@@ -24,7 +25,7 @@ const typeDefs = gql`
     services: [String]!
     acceptTerms: Boolean
     time: String!
-    
+    phone: String!
   }
   
   type removedOrder {
