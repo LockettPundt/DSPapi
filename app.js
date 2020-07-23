@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { loggingMiddleware } = require('./middleware/middleware');
 require('dotenv').config();
 
 mongoose.connect(process.env.DB_URI, {
@@ -16,6 +17,7 @@ mongoose.connect(process.env.DB_URI, {
 
 const app = express();
 
+app.use('/graphql', loggingMiddleware);
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
