@@ -55,6 +55,7 @@ const resolvers = {
           OrderModel.updateOne({ _id: id }, order),
           OrderModel.findOne({ _id: id }),
         ]);
+        nodeMailer(updatedOrder[1]); // need to test this.
         return updatedOrder[1];
       } catch (error) {
         console.log(error);
