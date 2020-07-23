@@ -40,6 +40,7 @@ const typeDefs = gql`
   type Mutation {
     addOrder(order: OrderInput): Order,
     removeOrder(id: ID): removedOrder,
+    updateOrder(id: ID!, order: OrderInput!): Order,
   }
 `;
 
