@@ -48,6 +48,19 @@ const resolvers = {
         return [];
       }
     },
+    updateOrder: async (obj, args) => {
+      const { order, id } = args;
+      try {
+        const updatedOrder = await Promise.all([
+          OrderModel.updateOne({ _id: id }, order),
+          OrderModel.findOne({ _id: id }),
+        ]);
+        return updatedOrder[1];
+      } catch (error) {
+        console.log(error);
+        return [];
+      }
+    },
   },
 };
 
