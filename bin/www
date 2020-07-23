@@ -28,20 +28,9 @@ const server = new ApolloServer({
   resolvers,
   introspection: true,
   playground: true,
-  // context: ({ req }) => {
-  //   // user auth can happen here.
-  //   // returns a user object or grants access for the user
-  //   // or you could return an error so that a user is blocked from
-  //   // posting a mutation.
-  //   // here is a hardcoded user auth.
-  //   const fakeUserAuth = {
-  //     userId: '12345',
-  //     name: 'lockett',
-  //   };
-  //   return {
-  //     ...fakeUserAuth,
-  //   };
-  // },
+  context: ({ req }) => {
+    // console.log(req);
+  },
 });
 
 /**
