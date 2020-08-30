@@ -1,9 +1,9 @@
-const moment = require('moment');
+/* eslint-disable no-unused-vars */
+import moment from 'moment'
+import Order from '../schema/Order-type'
 
-const emailGenerator = ({
-  firstName, lastName, time, jobDate, services, _id: id,
-}) => {
-  const formattedDate = `${moment(jobDate).format('LL')} at ${time}`;
+export default function emailGenerator(order: Order) {
+  const formattedDate = `${moment(order.jobDate).format('LL')} at ${order.time}`;
   const template = `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="https://www.w3.org/1999/xhtml">
@@ -31,7 +31,7 @@ const emailGenerator = ({
                     <table class="row">
                       <tr>
                         <th class="small-12 large-6 first columns">
-                          Conformation Number: ${id}
+                          Conformation Number: ${order._id}
                         </th>
                         <th class="small-12 large-6 last columns">
                           When: ${formattedDate}
@@ -51,6 +51,4 @@ const emailGenerator = ({
 
   `;
   return template;
-};
-
-module.exports = emailGenerator;
+}

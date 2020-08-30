@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
-const nodeMailer = require('../utils/clientMailer');
-const OrderModel = require('../models/OrderModel');
+import nodeMailer from '../utils/clientMailer';
+import OrderModel from '../models/OrderModel';
+import { IResolvers } from 'graphql-tools'
+import Order from '../schema/Order-type'
 
-const resolvers = {
+const resolvers: IResolvers = {
   Query: {
-    orders: async () => {
+    orders: async (obj, args, context) => {
       try {
-        const orderList = await OrderModel.find();
+        const orderList: any = await OrderModel.find();
         console.log(orderList);
         return orderList;
       } catch (error) {
@@ -14,9 +16,9 @@ const resolvers = {
         return [];
       }
     },
-    singleOrder: async (obj, { id }) => {
+    singleOrder: async (obj, { id }, context) => {
       try {
-        const singleOrder = await OrderModel.findOne({ _id: id });
+        const singleOrder: any = await OrderModel.findOne({ _id: id });
         return singleOrder;
       } catch (error) {
         console.log(error);
@@ -28,7 +30,7 @@ const resolvers = {
   Mutation: {
     addOrder: async (obj, { order }) => {
       try {
-        const newOrder = await OrderModel.create({
+        const newOrder: any = await OrderModel.create({
           ...order,
         });
         nodeMailer(newOrder);
@@ -41,21 +43,21 @@ const resolvers = {
 
     removeOrder: async (obj, { id }) => {
       try {
-        const removeOrder = await OrderModel.deleteOne({ _id: id });
+        const removeOrder: any = await OrderModel.deleteOne({ _id: id });
         return { message: `${id} was removed.` };
       } catch (error) {
         console.log(error);
         return [];
       }
     },
-    updateOrder: async (obj, args) => {
-      const { order, id } = args;
+    updateOrder: async (obj, { order, id }, context) => {
+
       try {
-        const updatedOrder = await Promise.all([
+        const updatedOrder: any = await Promise.all([
           OrderModel.updateOne({ _id: id }, order),
           OrderModel.findOne({ _id: id }),
         ]);
-        nodeMailer(updatedOrder[1]); // need to test this.
+        nodeMailer(updatedOrder[1]); // this is temporaary.
         return updatedOrder[1];
       } catch (error) {
         console.log(error);
@@ -65,4 +67,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;

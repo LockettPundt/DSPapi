@@ -1,8 +1,9 @@
-const nodemailer = require('nodemailer');
-const emailGenerator = require('./emailGenerator');
-require('dotenv').config();
+import nodemailer from 'nodemailer'
+import emailGenerator from './emailGenerator'
+import { EMAIL, EMAIL_PW } from '../config'
+import Order from '../schema/Order-type'
 
-async function nodeMailer(order) {
+export default async function nodeMailer(order: Order) {
   const template = emailGenerator(order);
 
   const transporter = nodemailer.createTransport({
@@ -10,14 +11,14 @@ async function nodeMailer(order) {
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PW,
+      user: EMAIL,
+      pass: EMAIL_PW,
     },
   });
 
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: '"Daniel Stabler Photography" <dspdonotreply@gmail.com>', // sender address
+    from: '"Daniel Stabler Photography" <dspdonotreply@gmail.com>',
     to: `${order.email}`, // list of receivers
     subject: `Thank You ${order.firstName}`, // Subject line
     text: `Thank You ${order.firstName}`, // plain text body
@@ -25,8 +26,6 @@ async function nodeMailer(order) {
   });
 
   console.log('Message sent: %s', info.messageId);
-
-  // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 }
 
-module.exports = nodeMailer;
+
