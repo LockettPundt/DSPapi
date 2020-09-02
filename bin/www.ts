@@ -7,8 +7,7 @@ import * as debug from 'debug'
 import { createServer } from 'http'
 import { PORT } from '../config'
 import { makeExecutableSchema } from 'graphql-tools';
-import typeDefs from '../typeDefs/typeDefs';
-import resolvers from '../resolvers/resolvers';
+import { orderResolvers, orderTypes } from '../schema/Order-type'
 import { GraphQLSchema } from 'graphql'
 
 debug.enable('dspapi:server')
@@ -19,8 +18,8 @@ app.set('port', port);
 const httpServer = createServer(app);
 
 const schema: GraphQLSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
+  typeDefs: [orderTypes],
+  resolvers: [orderResolvers],
 })
 
 const server = new ApolloServer({
