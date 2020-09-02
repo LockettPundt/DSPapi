@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer'
 import emailGenerator from './emailGenerator'
 import { EMAIL, EMAIL_PW } from '../config'
-import Order from '../schema/Order-type'
+import { Order } from '../schema/Order-type'
 
 export default async function nodeMailer(order: Order) {
   const template = emailGenerator(order);

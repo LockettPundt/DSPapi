@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import moment from 'moment'
-import Order from '../schema/Order-type'
+import { Order } from '../schema/Order-type'
 
 export default function emailGenerator(order: Order) {
   const formattedDate = `${moment(order.jobDate).format('LL')} at ${order.time}`;
@@ -31,7 +31,7 @@ export default function emailGenerator(order: Order) {
                     <table class="row">
                       <tr>
                         <th class="small-12 large-6 first columns">
-                          Conformation Number: ${order._id}
+                          Conformation Number: ${order.id}
                         </th>
                         <th class="small-12 large-6 last columns">
                           When: ${formattedDate}
